@@ -2,4 +2,3 @@ node_modules
 .idea
 *.iml
 dist/*
-!dist/index.html
