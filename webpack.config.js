@@ -13,8 +13,16 @@ module.exports = {
         use: ['style-loader', 'css-loader'],
       },
       {
-        test: /\.jpg$/i,
-        type: 'asset/resource',
+        test: /\.jpg|ico$/i,
+        type: 'asset',
+        generator: {
+          filename: 'image/[name][ext]',
+        },
+        parser: {
+          dataUrlCondition: {
+            maxSize: 2 * 1024, // 2kb
+          },
+        },
       },
     ],
   },
