@@ -3,12 +3,14 @@ const path = require('path');
 
 module.exports = {
   mode: 'development',
-  entry: './src/index.js',
+  entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
+    publicPath: '/dist/',
     filename: '[name]-[contenthash].js',
     clean: true,
   },
+  target: ['web', 'es5'],
   module: {
     rules: [
       {
