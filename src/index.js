@@ -11,4 +11,12 @@ function component() {
   return element;
 }
 
-document.body.appendChild(component());
+const star = component();
+document.body.appendChild(star);
+
+if (module.hot && process.env.NODE_ENV === 'development') {
+  module.hot.accept();
+  module.hot.dispose(function () {
+    document.body.removeChild(star);
+  });
+}

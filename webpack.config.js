@@ -6,12 +6,15 @@ module.exports = {
   entry: ['core-js/stable', 'regenerator-runtime/runtime', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
+    publicPath: '/',
     filename: '[name]-[contenthash].js',
     clean: true,
   },
   target: ['web', 'es5'],
   devtool: 'eval-source-map',
+  devServer: {
+    port: 7000,
+  },
   module: {
     rules: [
       {
