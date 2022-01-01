@@ -9,6 +9,7 @@ module.exports = {
     publicPath: '/',
     filename: '[name]-[contenthash].js',
     clean: true,
+    library: '_',
   },
   target: ['web', 'es5'],
   devtool: 'eval-source-map',
