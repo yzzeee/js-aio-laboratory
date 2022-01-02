@@ -11,6 +11,7 @@ import moment_timezone from 'moment-timezone';
 import ip from 'ip';
 import * as ip_utils from 'ip-utils';
 import * as dummy from './dummy';
+import * as util from './util';
 
 function component() {
   const element = document.createElement('div');
@@ -23,7 +24,7 @@ function component() {
 const star = component();
 document.body.appendChild(star);
 
-Object.assign(window, dummy);
+Object.assign(window, dummy, util);
 export { lodash, S, L, C, moment, moment_timezone, ip, ip_utils };
 
 if (module.hot && process.env.NODE_ENV === 'development') {
