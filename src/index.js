@@ -8,6 +8,8 @@ import * as L from 'fxjs/Lazy';
 import * as C from 'fxjs/Concurrency';
 import moment from 'moment';
 import moment_timezone from 'moment-timezone';
+import ip from 'ip';
+import * as ip_utils from 'ip-utils';
 
 function component() {
   const element = document.createElement('div');
@@ -20,7 +22,7 @@ function component() {
 const star = component();
 document.body.appendChild(star);
 
-export { lodash, S, L, C, moment, moment_timezone };
+export { lodash, S, L, C, moment, moment_timezone, ip, ip_utils };
 
 if (module.hot && process.env.NODE_ENV === 'development') {
   module.hot.accept();
