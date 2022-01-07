@@ -12,6 +12,7 @@ import ip from 'ip';
 import * as ip_utils from 'ip-utils';
 import * as dummy from './dummy';
 import * as util from './util';
+import * as playground from './playground';
 
 function component() {
   const element = document.createElement('div');
@@ -24,7 +25,7 @@ function component() {
 const star = component();
 document.body.appendChild(star);
 
-Object.assign(window, dummy, util, { _, S, L, C, moment, moment_timezone, ip, ip_utils });
+Object.assign(window, dummy, util, playground, { _, S, L, C, moment, moment_timezone, ip, ip_utils });
 
 if (module.hot && process.env.NODE_ENV === 'development') {
   module.hot.accept();
