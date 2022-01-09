@@ -1,3 +1,7 @@
 [submodule "tiny-react"]
 	path = sub_laboratory/tiny-react
 	url = git@github.com:yzzeee/tiny-react.git
+
+[submodule "tiny-redux"]
+	path = sub_laboratory/tiny-redux
+	url = git@github.com:yzzeee/tiny-redux.git
