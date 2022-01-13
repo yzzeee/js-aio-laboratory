@@ -2,6 +2,7 @@ import './style/main.css';
 import './sample/react.js';
 import './sample/redux.js';
 import './sample/react-redux.js';
+import './sample/redux-thunk.js';
 import _ from 'lodash';
 import * as S from 'fxjs/Strict';
 import * as L from 'fxjs/Lazy';
@@ -25,7 +26,16 @@ function component() {
 const star = component();
 document.body.appendChild(star);
 
-Object.assign(window, dummy, util, playground, { _, S, L, C, moment, moment_timezone, ip, ip_utils });
+Object.assign(window, dummy, util, playground, {
+  _,
+  S,
+  L,
+  C,
+  moment,
+  moment_timezone,
+  ip,
+  ip_utils,
+});
 
 if (module.hot && process.env.NODE_ENV === 'development') {
   module.hot.accept();
