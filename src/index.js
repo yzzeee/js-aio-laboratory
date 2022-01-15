@@ -3,6 +3,7 @@ import './sample/react.js';
 import './sample/redux.js';
 import './sample/react-redux.js';
 import './sample/redux-thunk.js';
+import './sample/redux-saga.js';
 import _ from 'lodash';
 import * as S from 'fxjs/Strict';
 import * as L from 'fxjs/Lazy';
