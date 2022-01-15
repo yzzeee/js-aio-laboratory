@@ -1,14 +1,22 @@
 import React from 'react';
+import ReactDOM from 'react-dom';
 import { applyMiddleware, createStore } from 'redux';
+import { Provider, useSelector } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';
-import { delay, take } from 'redux-saga/effects';
+import { all, call, delay, put, take, takeEvery } from 'redux-saga/effects';
 
 const ASYNC_ACTION1 = 'ASYNC_ACTION1';
 const ASYNC_ACTION2 = 'ASYNC_ACTION2';
+const ASYNC_GET_COMMENT = 'ASYNC_GET_COMMENT';
+const SET_COMMENT = 'SET_COMMENT';
 
 function reducer(state, action) {
-  console.log('REDUCER', action);
-  return state;
+  switch (action.type) {
+    case SET_COMMENT:
+      return { ...state, comment: action.payload };
+    default:
+      return state;
+  }
 }
 
 function* helloSaga() {
@@ -23,27 +31,39 @@ function* helloSaga() {
   }
 }
 
+function* watchCommentSaga() {
+  yield takeEvery(ASYNC_GET_COMMENT, function* () {
+    const comment = yield call(
+      id =>
+        fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res =>
+          res.json()
+        ),
+      Math.floor(Math.random() * 10) + 1
+    );
+
+    yield put({ type: SET_COMMENT, payload: comment });
+  });
+}
+
+function* rootSaga() {
+  yield all([helloSaga(), watchCommentSaga()]);
+}
+
 const sagaMiddleware = createSagaMiddleware();
 const store = createStore(reducer, applyMiddleware(sagaMiddleware));
-sagaMiddleware.run(helloSaga);
+sagaMiddleware.run(rootSaga);
 
-setTimeout(() => store.dispatch({ type: ASYNC_ACTION1 }), 1000);
-setTimeout(() => store.dispatch({ type: ASYNC_ACTION2 }), 3000);
-setTimeout(() => store.dispatch({ type: ASYNC_ACTION1 }), 5000);
-setTimeout(() => store.dispatch({ type: ASYNC_ACTION1 }), 7000); // helloSaga wait ASYNC_ACTION2
-setTimeout(() => store.dispatch({ type: ASYNC_ACTION2 }), 9000);
+store.dispatch({ type: ASYNC_GET_COMMENT });
+// store.subscribe(() => console.log(store.getState()));
 
-/**
- START HELLO SAGA
- REDUCER {type: 'ASYNC_ACTION1'}
- END ASYNC ACTION1
- REDUCER {type: 'ASYNC_ACTION2'}
- END ASYNC ACTION2
- START HELLO SAGA
- REDUCER {type: 'ASYNC_ACTION1'}
- END ASYNC ACTION1
- REDUCER {type: 'ASYNC_ACTION1'} // helloSaga does not work
- REDUCER {type: 'ASYNC_ACTION2'}
- END ASYNC ACTION2
- START HELLO SAGA
-*/
+function Component() {
+  const comment = useSelector(state => state?.comment);
+  return <>{comment?.username}</>;
+}
+
+ReactDOM.render(
+  <Provider store={store}>
+    <Component />
+  </Provider>,
+  document.getElementById('redux-saga')
+);
