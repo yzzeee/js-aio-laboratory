@@ -40,9 +40,9 @@ const fetchUser = id => {
 
 store.dispatch(fetchUser(Math.floor(Math.random() * 10) + 1));
 
-store.subscribe(() => {
-  console.log(store.getState());
-});
+// store.subscribe(() => {
+//   console.log(store.getState());
+// });
 
 function Component() {
   const user = useSelector(state => state.user);

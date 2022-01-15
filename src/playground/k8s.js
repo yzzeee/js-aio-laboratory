@@ -13,7 +13,12 @@ export const 변경전 = map(
       const {
         metadata: { name },
       } = item;
-      if (includes(['kubernetes.io/basic-auth', 'kubernetes.io/ssh-auth'], item.type)) {
+      if (
+        includes(
+          ['kubernetes.io/basic-auth', 'kubernetes.io/ssh-auth'],
+          item.type
+        )
+      ) {
         if (!acc[item.type]) {
           acc[item.type] = [{ label: name, value: name }];
         } else {
@@ -22,23 +27,31 @@ export const 변경전 = map(
       }
       return acc;
     },
-    {},
+    {}
   ),
   (value, key) => ({
     label: labels[key],
     options: value,
-  }),
+  })
 );
 
 export const 변경후 = chain(SECRET_CONFIG_MAP)
-  .filter((item) => includes(['kubernetes.io/basic-auth', 'kubernetes.io/ssh-auth'], item.type))
+  .filter(item =>
+    includes(['kubernetes.io/basic-auth', 'kubernetes.io/ssh-auth'], item.type)
+  )
   .groupBy('type')
   .map((group, type) => {
-    return { label: labels[type], options: map(group, ({ metadata: { name } }) => ({ label: name, value: name })) };
+    return {
+      label: labels[type],
+      options: map(group, ({ metadata: { name } }) => ({
+        label: name,
+        value: name,
+      })),
+    };
   })
   .value();
 
-console.log(isEqual(변경전, 변경후));
+// console.log(isEqual(변경전, 변경후));
 
 export const 변경전2 = map(
   reduce(
@@ -54,21 +67,24 @@ export const 변경전2 = map(
       }
       return acc;
     },
-    {},
+    {}
   ),
   (value, kind) => {
     return {
       label: kind === 'ConfigMap' ? 'ConfigMap' : 'Secret',
       options: value,
     };
-  },
+  }
 );
 
 export const 변경후2 = chain(concat(CONFIG_MAP, SECRET))
   .groupBy('kind')
   .map((group, type) => {
-    return { label: labels[type], options: map(group, (item) => ({ label: item.name, value: item })) };
+    return {
+      label: labels[type],
+      options: map(group, item => ({ label: item.name, value: item })),
+    };
   })
   .value();
 
-console.log(변경전2, 변경후2);
+// console.log(변경전2, 변경후2);
