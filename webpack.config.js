@@ -14,6 +14,7 @@ module.exports = {
   target: ['web', 'es5'],
   devtool: 'eval-source-map',
   devServer: {
+    historyApiFallback: true,
     port: 7000,
   },
   module: {
@@ -43,6 +44,9 @@ module.exports = {
             presets: ['@babel/preset-env', '@babel/preset-react'],
           },
         },
+        resolve: {
+          extensions: ['.js', '.jsx'],
+        },
       },
     ],
   },
@@ -52,6 +56,9 @@ module.exports = {
     }),
   ],
   resolve: {
+    alias: {
+      '@page': path.resolve(__dirname, './src/page'),
+    },
     fallback: {
       os: require.resolve('os-browserify/browser'),
       path: require.resolve('path-browserify'),
