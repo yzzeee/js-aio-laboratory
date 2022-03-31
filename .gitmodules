@@ -5,3 +5,7 @@
 [submodule "tiny-redux"]
 	path = sub_laboratory/tiny-redux
 	url = git@github.com:yzzeee/tiny-redux.git
+
+[submodule "tiny-micro-frontend"]
+	path = sub_laboratory/tiny-micro-frontend
+	url = git@github.com:yzzeee/tiny-micro-frontend.git
