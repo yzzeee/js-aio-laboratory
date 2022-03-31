@@ -58,6 +58,7 @@ module.exports = {
   resolve: {
     alias: {
       '@page': path.resolve(__dirname, './src/page'),
+      '@locale': path.resolve(__dirname, './src/locale'),
     },
     fallback: {
       os: require.resolve('os-browserify/browser'),
