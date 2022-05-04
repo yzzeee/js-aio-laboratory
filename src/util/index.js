@@ -1,5 +1,5 @@
 const { zipObject } = require('lodash');
-const req = require.context('./', false, /.js$/);
+const req = require.context('./', false, /.(js|ts)$/);
 const modules = req
   .keys()
   .filter(file => file !== './index.js')
