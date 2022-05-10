@@ -33,12 +33,13 @@ export default function App() {
           <Link to='/redux-saga'>Redux Saga</Link>
 
           <Routes>
-            <Route path='' element={<Home />} />
-            <Route path='react' element={<HelloReact />} />
-            <Route path='redux' element={<HelloRedux />} />
-            <Route path='react-redux' element={<HelloReactRedux />} />
-            <Route path='redux-thunk' element={<HelloReduxThunk />} />
-            <Route path='redux-saga' element={<HelloReduxSaga />} />
+            <Route path='/' element={<Home />} />
+            <Route path='/:active_tab' element={<Home />} />
+            <Route path='/react' element={<HelloReact />} />
+            <Route path='/redux' element={<HelloRedux />} />
+            <Route path='/react-redux' element={<HelloReactRedux />} />
+            <Route path='/redux-thunk' element={<HelloReduxThunk />} />
+            <Route path='/redux-saga' element={<HelloReduxSaga />} />
           </Routes>
         </div>
       </Router>
