@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl';
 import { getLocaleObject, toIntl } from '../util/locale';
 import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
-
+import AbortControllerTest from './AbortControllerTest';
 /**
  * @link https://www.pluralsight.com/guides/handling-tabs-using-page-urls-and-react-router-doms
  **/
@@ -21,12 +21,13 @@ export default function Home() {
   const DEFAULT_ACTIVE_TAB = 'in_progress';
 
   const tabs = {
-    'draft': {
-      title: 'Draft',
+    'abort_controller_test': {
+      title: 'AbortControllerTest',
       content: (
         <Row className='p-2'>
           <Col sm='12' className='p-2'>
-            <h4 className='text-info'>Draft Tasks</h4>
+            <h4 className='text-info'>AbortControllerTest</h4>
+            <AbortControllerTest/>
           </Col>
         </Row>
       ),
@@ -102,6 +103,7 @@ export default function Home() {
       </div>
     </div>
     HOME
+
     &nbsp;|&nbsp;
     {testLocaleMessage}
     &nbsp;|&nbsp;
