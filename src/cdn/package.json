@@ -1,0 +1,12 @@
+{
+  "name": "cdn",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "devDependencies": {
+    "webpack-cli": "^4.10.0"
+  },
+  "dependencies": {
+    "@fxts/core": "^0.9.0"
+  }
+}

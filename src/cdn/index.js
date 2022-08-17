@@ -1,6 +1,8 @@
+import { join } from '@fxts/core';
+
 function component() {
     const element = document.createElement('div');
-    element.innerHTML =  _.join(' ', ['Hello', 'fxts']);
+    element.innerHTML =  join(' ', ['Hello', 'fxts']);
     return element;
 }
 
