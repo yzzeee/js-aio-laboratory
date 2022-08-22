@@ -1,4 +1,3 @@
-import React from 'react';
 import { SynchronizedAreaChart } from '../component/chart/areachart/SyncronizedAreaChart';
 import Charts from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';

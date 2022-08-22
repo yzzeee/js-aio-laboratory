@@ -1,4 +1,3 @@
-import React from 'react';
 import { applyMiddleware, createStore } from 'redux';
 import { Provider, useSelector } from 'react-redux';
 import createSagaMiddleware from 'redux-saga';

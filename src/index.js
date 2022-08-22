@@ -10,8 +10,7 @@ import * as ip_utils from 'ip-utils';
 import * as dummy from './dummy';
 import * as util from './util';
 import * as playground from './playground';
-import React from 'react';
-import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import App from './App';
 
 Object.assign(window, dummy, util, playground, {
@@ -25,4 +24,6 @@ Object.assign(window, dummy, util, playground, {
   ip_utils,
 });
 
-ReactDOM.render(<App />, document.getElementById('root'));
+const container = document.getElementById("root");
+const root = createRoot(container);
+root.render(<App/>);

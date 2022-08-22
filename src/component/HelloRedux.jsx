@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import * as Redux from 'redux';
 
 function counter(state, action) {

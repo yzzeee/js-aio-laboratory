@@ -1,4 +1,3 @@
-import React from 'react';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, useSelector } from 'react-redux';
 import thunk from 'redux-thunk';
