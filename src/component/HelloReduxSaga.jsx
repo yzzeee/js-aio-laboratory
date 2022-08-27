@@ -1,5 +1,5 @@
-import { applyMiddleware, createStore } from 'redux';
 import { Provider, useSelector } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import { all, call, delay, put, take, takeEvery } from 'redux-saga/effects';
 

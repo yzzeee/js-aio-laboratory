@@ -1,9 +1,9 @@
-import lodash from 'lodash';
-import * as S from 'fxjs/Strict';
-import * as L from 'fxjs/Lazy';
 import * as C from 'fxjs/Concurrency';
+import * as L from 'fxjs/Lazy';
+import * as S from 'fxjs/Strict';
 import ip from 'ip';
 import * as ip_utils from 'ip-utils';
+import lodash from 'lodash';
 import { IP_ADDRESSES } from '../dummy/ip_addresses';
 
 /**

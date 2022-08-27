@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { getLocaleObject, toIntl } from '../util/locale';
-import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
 import { Outlet, useNavigate, useParams } from 'react-router-dom';
+import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { getLocaleObject, toIntl } from '../util/locale';
 import AbortControllerTest from './AbortControllerTest';
 /**
  * @link https://www.pluralsight.com/guides/handling-tabs-using-page-urls-and-react-router-doms

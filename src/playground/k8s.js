@@ -1,5 +1,5 @@
-import { CONFIG_MAP, SECRET, SECRET_CONFIG_MAP } from '../dummy/k8s';
 import { chain, concat, includes, isEqual, map, reduce } from 'lodash';
+import { CONFIG_MAP, SECRET, SECRET_CONFIG_MAP } from '../dummy/k8s';
 
 const labels = {
   'kubernetes.io/basic-auth': 'w.gitbasicauth',

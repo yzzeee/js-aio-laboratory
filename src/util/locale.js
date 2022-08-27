@@ -1,7 +1,7 @@
-import { isArray, isEmpty, isString } from 'lodash/lang';
-import { replace } from 'lodash/string';
-import { mapValues } from 'lodash/object';
 import { reduce } from 'lodash/collection'
+import { isArray, isEmpty, isString } from 'lodash/lang';
+import { mapValues } from 'lodash/object';
+import { replace } from 'lodash/string';
 
 /**
  * @description 다국어 변환 함수와 다국어 처리 키를 인자로 받아서 다국어 처리된 메시지를 반환하는 함수

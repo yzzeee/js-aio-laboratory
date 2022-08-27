@@ -1,5 +1,5 @@
-import { createStore, applyMiddleware } from 'redux';
 import { Provider, useSelector } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
 const INITIAL_STATE = { user: '' };

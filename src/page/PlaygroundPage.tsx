@@ -1,6 +1,6 @@
-import { SynchronizedAreaChart } from '../component/chart/areachart/SyncronizedAreaChart';
 import Charts from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
+import { SynchronizedAreaChart } from '../component/chart/areachart/SyncronizedAreaChart';
 
 const data = [
   {

@@ -1,7 +1,7 @@
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
-import thunk from 'redux-thunk';
 import { Provider, useSelector } from 'react-redux';
+import { applyMiddleware, createStore } from 'redux';
+import thunk from 'redux-thunk';
 
 const INITIAL_STATE = { user: '' };
 const SET_USER = 'SET_USER';

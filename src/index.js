@@ -1,17 +1,17 @@
 import './style/main.css';
-import _ from 'lodash';
-import * as S from 'fxjs/Strict';
-import * as L from 'fxjs/Lazy';
+import { createRoot } from 'react-dom/client';
 import * as C from 'fxjs/Concurrency';
-import moment from 'moment';
-import moment_timezone from 'moment-timezone';
+import * as L from 'fxjs/Lazy';
+import * as S from 'fxjs/Strict';
 import ip from 'ip';
 import * as ip_utils from 'ip-utils';
-import * as dummy from './dummy';
-import * as util from './util';
-import * as playground from './playground';
-import { createRoot } from 'react-dom/client';
+import _ from 'lodash';
+import moment from 'moment';
+import moment_timezone from 'moment-timezone';
 import App from './App';
+import * as dummy from './dummy';
+import * as playground from './playground';
+import * as util from './util';
 
 Object.assign(window, dummy, util, playground, {
   _,

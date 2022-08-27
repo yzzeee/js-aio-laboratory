@@ -1,6 +1,6 @@
 import ReactDOM from 'react-dom';
+import { Provider, connect, useDispatch, useSelector } from 'react-redux';
 import { createStore } from 'redux';
-import { Provider, connect, useSelector, useDispatch } from 'react-redux';
 
 const INCREMENT1 = 'INCREMENT1';
 const INCREMENT2 = 'INCREMENT2';

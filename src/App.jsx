@@ -1,13 +1,13 @@
 import { useState } from 'react';
-import { BrowserRouter as Router, Link, Route, Routes } from 'react-router-dom';
-import Home from './component/Home';
-import HelloReact from './component/HelloReact';
-import HelloRedux from './component/HelloRedux';
-import HelloReactRedux from './component/HelloReactRedux';
-import HelloReduxThunk from './component/HelloReduxThunk';
-import HelloReduxSaga from './component/HelloReduxSaga';
 import { IntlProvider } from 'react-intl';
+import { Link, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 import { t_en, t_ko, w_en, w_ko } from '@locale';
+import HelloReact from './component/HelloReact';
+import HelloReactRedux from './component/HelloReactRedux';
+import HelloRedux from './component/HelloRedux';
+import HelloReduxSaga from './component/HelloReduxSaga';
+import HelloReduxThunk from './component/HelloReduxThunk';
+import Home from './component/Home';
 import PlaygroundPage from './page/PlaygroundPage';
 
 const DEFAULT_LOCALE = 'ko';
