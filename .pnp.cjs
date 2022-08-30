@@ -64,7 +64,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["moment-timezone", "npm:0.5.34"],\
             ["os-browserify", "npm:0.3.0"],\
             ["path-browserify", "npm:1.0.1"],\
-            ["prettier", "npm:2.7.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-apexcharts", "virtual:e67a242d4f2d8e6a50abb73e1fbeb4ab620558d77422c2e0d6b036357306975f289c9c1a5579d0c48353be72453c8fe13b5ab88d7fed650967f3564d4b7e831c#npm:1.4.0"],\
@@ -7243,7 +7242,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
             ["moment-timezone", "npm:0.5.34"],\
             ["os-browserify", "npm:0.3.0"],\
             ["path-browserify", "npm:1.0.1"],\
-            ["prettier", "npm:2.7.1"],\
             ["prop-types", "npm:15.8.1"],\
             ["react", "npm:18.2.0"],\
             ["react-apexcharts", "virtual:e67a242d4f2d8e6a50abb73e1fbeb4ab620558d77422c2e0d6b036357306975f289c9c1a5579d0c48353be72453c8fe13b5ab88d7fed650967f3564d4b7e831c#npm:1.4.0"],\
@@ -8431,15 +8429,6 @@ function $$SETUP_STATE(hydrateRuntimeState, basePath) {
           "packageLocation": "./.yarn/cache/prelude-ls-npm-1.2.1-3e4d272a55-cd192ec0d0.zip/node_modules/prelude-ls/",\
           "packageDependencies": [\
             ["prelude-ls", "npm:1.2.1"]\
-          ],\
-          "linkType": "HARD"\
-        }]\
-      ]],\
-      ["prettier", [\
-        ["npm:2.7.1", {\
-          "packageLocation": "./.yarn/cache/prettier-npm-2.7.1-d1f40f5e1a-55a4409182.zip/node_modules/prettier/",\
-          "packageDependencies": [\
-            ["prettier", "npm:2.7.1"]\
           ],\
           "linkType": "HARD"\
         }]\
