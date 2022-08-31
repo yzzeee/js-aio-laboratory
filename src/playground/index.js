@@ -5,6 +5,4 @@ const modules = req
   .filter(file => file !== './index.js')
   .map(req);
 
-module.exports = modules.reduce((acc, module) => {
-  return { ...acc, ...zipObject(Object.keys(module), Object.values(module)) };
-}, {});
+module.exports = modules.reduce((acc, module) => ({ ...acc, ...zipObject(Object.keys(module), Object.values(module)) }), {});

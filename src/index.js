@@ -24,6 +24,6 @@ Object.assign(window, dummy, util, playground, {
   ip_utils,
 });
 
-const container = document.getElementById("root");
+const container = document.getElementById('root');
 const root = createRoot(container);
 root.render(<App/>);

@@ -17,14 +17,15 @@ class Aes {
   private readonly encoder: Encoding;
 
   constructor(key: string) {
-    if (instance) {
+    if (instance)
       return instance;
-    }
+
     this.key = enc.Utf8.parse(key);
     this.iv = enc.Utf8.parse(key.substring(0, 16));
     this.mode = mode.CBC;
     this.padding = pad.PKCS7;
     this.encoder = enc.Utf8;
+    // eslint-disable-next-line @typescript-eslint/no-this-alias
     instance = this;
   }
 
@@ -48,4 +49,4 @@ class Aes {
   }
 }
 
-export const aes = new Aes(KEY);
+export default new Aes(KEY);

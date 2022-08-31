@@ -11,9 +11,7 @@ const dns1123LabelMaxLength = 63;
  * @return {boolean} 패턴 매치 여부
  * @link https://github.com/kubernetes/kubernetes/blob/53a9d106c4aabcd550cc32ae4e8004f32fb0ae7b/pkg/util/validation.go
  */
-export const isDNSLabel = (value) => {
-  return size(value) <= dns1123LabelMaxLength && dns1123LabelRegexp.test(value);
-};
+export const isDNSLabel = value => size(value) <= dns1123LabelMaxLength && dns1123LabelRegexp.test(value);
 
 const dns1123SubdomainFmt = `${dns1123LabelFmt}(\\.${dns1123LabelFmt})*`;
 const dns1123SubdomainRegexp = new RegExp(`^${dns1123SubdomainFmt}$`);
@@ -25,9 +23,7 @@ const dns1123SubdomainMaxLength = 253;
  * @return {boolean} 패턴 매치 여부
  * @link https://github.com/kubernetes/kubernetes/blob/53a9d106c4aabcd550cc32ae4e8004f32fb0ae7b/pkg/util/validation.go
  */
-export const isDNS1123Subdomain = (value) => {
-  return size(value) <= dns1123SubdomainMaxLength && dns1123SubdomainRegexp.test(value);
-};
+export const isDNS1123Subdomain = value => size(value) <= dns1123SubdomainMaxLength && dns1123SubdomainRegexp.test(value);
 
 // Test
 // for (let val of DNS_1123_LABEL.GOOD_VALUE) console.log('DNS 1123 LABEL 👍', isDNSLabel(val));

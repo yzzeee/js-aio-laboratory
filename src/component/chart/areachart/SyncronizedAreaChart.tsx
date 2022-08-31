@@ -1,5 +1,5 @@
-import {
-  Area,
+/* eslint-disable array-element-newline */
+import { Area,
   AreaChart,
   CartesianGrid,
   ResponsiveContainer,
@@ -7,8 +7,7 @@ import {
   XAxis,
   XAxisProps,
   YAxis,
-  YAxisProps,
-} from 'recharts';
+  YAxisProps } from 'recharts';
 import styled from 'styled-components';
 
 const StyledDiv = styled.div`
@@ -18,7 +17,7 @@ const StyledDiv = styled.div`
   flex-grow: 1;
   height: ${props => props.height};
   position: relative;
-  
+
   h3 {
     color: gray;
     float: right;
@@ -29,7 +28,6 @@ const StyledDiv = styled.div`
     font-size: 1rem;
   }
 `;
-
 
 interface SynchronizedAreaChartProps {
   syncId?: string | undefined;
@@ -59,7 +57,7 @@ const defaultFillColors = [
   '#00b9b1', '#ff9600', '#66b974',
 ];
 
-const SynchronizedAreaChart: React.FC<SynchronizedAreaChartProps> = (props) => {
+const SynchronizedAreaChart: React.FC<SynchronizedAreaChartProps> = props => {
   const {
     syncId = 'anyId',
     data,
@@ -72,43 +70,35 @@ const SynchronizedAreaChart: React.FC<SynchronizedAreaChartProps> = (props) => {
     xRange,
     yRange,
   } = props;
-  const dateFormatter = date => {
-    return new Date(date).toDateString();
-  };
+  const dateFormatter = date => new Date(date).toDateString();
   return (
     <StyledDiv height={height}>
       <h3>Bps</h3>
       <ResponsiveContainer debounce={1000}>
-        <AreaChart
-          data={data}
-          syncId={syncId}
-          margin={{
+        <AreaChart data={data}
+                   syncId={syncId}
+                   margin={{
             top: 10,
             right: 30,
             left: 8,
             bottom: 0,
-          }}
-        >
-          <CartesianGrid strokeDasharray={strokeDasharray} />
-          <XAxis dataKey={xPvt} domain={xRange} tickFormatter={dateFormatter} />
-          <YAxis domain={yRange} />
-          <Tooltip />
-          {yPvts.map((yPvt: string, index: number) => {
-            return (
-              <Area
-                key={`inarea-${index}`}
-                type='monotone'
-                dataKey={yPvt}
-                stroke={storkColors[index]}
-                fill={fillColors[index]}
-                fillOpacity={0.1}
-              />
-            );
-          })}
+          }}>
+          <CartesianGrid strokeDasharray={strokeDasharray}/>
+          <XAxis dataKey={xPvt} domain={xRange} tickFormatter={dateFormatter}/>
+          <YAxis domain={yRange}/>
+          <Tooltip/>
+          {yPvts.map((yPvt: string, index: number) => (
+              <Area key={`inarea-${index}`}
+                    dataKey={yPvt}
+                    fill={fillColors[index]}
+                    fillOpacity={0.1}
+                    stroke={storkColors[index]}
+                    type="monotone"/>
+            ))}
         </AreaChart>
       </ResponsiveContainer>
     </StyledDiv>
   );
 };
 
-export { SynchronizedAreaChart };
+export default SynchronizedAreaChart;

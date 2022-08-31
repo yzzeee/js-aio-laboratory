@@ -10,44 +10,42 @@ import AbortControllerTest from './AbortControllerTest';
  **/
 export default function Home() {
   const { formatMessage } = useIntl();
-  const locales = useMemo(() => {
-    return getLocaleObject(formatMessage, {
-      hello: 'w.hello',
-      testLocaleMessage: ['t.multi', ['t.multi', 'w.hello', 'w.locale'], ['t.multi', 'w.really', 'w.welcome']],
-    });
-  }, [formatMessage]);
+  const locales = useMemo(() => getLocaleObject(formatMessage, {
+    hello: 'w.hello',
+    testLocaleMessage: ['t.multi', ['t.multi', 'w.hello', 'w.locale'], ['t.multi', 'w.really', 'w.welcome']],
+  }), [formatMessage]);
   const testLocaleMessage = toIntl(formatMessage, ['t.multi', ['t.multi', 'w.hello', 'w.locale'], ['t.multi', 'w.really', 'w.welcome']]);
 
   const DEFAULT_ACTIVE_TAB = 'in_progress';
 
   const tabs = {
-    'abort_controller_test': {
+    abort_controller_test: {
       title: 'AbortControllerTest',
       content: (
-        <Row className='p-2'>
-          <Col sm='12' className='p-2'>
-            <h4 className='text-info'>AbortControllerTest</h4>
+        <Row className="p-2">
+          <Col className="p-2" sm="12">
+            <h4 className="text-info">AbortControllerTest</h4>
             <AbortControllerTest/>
           </Col>
         </Row>
       ),
     },
-    'in_progress': {
+    in_progress: {
       title: 'In Progress',
       content: (
-        <Row className='p-2'>
-          <Col sm='12' className='p-2'>
-            <h4 className='text-primary'>In Progress Tasks</h4>
+        <Row className="p-2">
+          <Col className="p-2" sm="12">
+            <h4 className="text-primary">In Progress Tasks</h4>
           </Col>
         </Row>
       ),
     },
-    'completed': {
+    completed: {
       title: 'Completed',
       content: (
-        <Row className='p-2'>
-          <Col sm='12' className='p-2'>
-            <h4 className='text-success'>Completed Tasks</h4>
+        <Row className="p-2">
+          <Col className="p-2" sm="12">
+            <h4 className="text-success">Completed Tasks</h4>
           </Col>
         </Row>
       ),
@@ -57,58 +55,58 @@ export default function Home() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    if (!active_tab) {
+    if (!active_tab)
       navigate(`/${DEFAULT_ACTIVE_TAB}`);
-    }
+
   }, []);
 
   const toggle = tab => {
-    if (active_tab !== tab) {
+    if (active_tab !== tab)
       navigate(`/${tab}`);
-    }
+
   };
 
-  return <>
-    <div className='row p-4'>
-      <div className='col-lg-12'>
-        <h2 className='mb-4'>Tasks</h2>
-        <Nav tabs>
-          {
-            Object.entries(tabs).map((tab) => (
-              <NavItem key={tab[0]}>
-                <NavLink
-                  className={active_tab === tab[0] ? 'active' : ''}
-                  onClick={() => {
-                    toggle(tab[0]);
-                  }}
-                  role='button'
-                >
-                  {tab[1].title}
-                </NavLink>
-              </NavItem>
-            ))
-          }
-        </Nav>
+  return (
+    <>
+      <div className="row p-4">
+        <div className="col-lg-12">
+          <h2 className="mb-4">Tasks</h2>
+          <Nav tabs>
+            {
+              Object.entries(tabs).map(tab => (
+                <NavItem key={tab[0]}>
+                  <NavLink className={active_tab === tab[0] ? 'active' : ''}
+                           role="button"
+                           onClick={() => {
+                      toggle(tab[0]);
+                    }}>
+                    {tab[1].title}
+                  </NavLink>
+                </NavItem>
+              ))
+            }
+          </Nav>
 
-        <TabContent activeTab={active_tab}>
-          {
-            Object.entries(tabs).map((tab) => (
-              <TabPane key={tab[0]} tabId={tab[0]}>
-                {tab[1].content}
-                <Outlet />
-              </TabPane>
-            ))
-          }
-        </TabContent>
+          <TabContent activeTab={active_tab}>
+            {
+              Object.entries(tabs).map(tab => (
+                <TabPane key={tab[0]} tabId={tab[0]}>
+                  {tab[1].content}
+                  <Outlet/>
+                </TabPane>
+              ))
+            }
+          </TabContent>
+        </div>
       </div>
-    </div>
-    HOME
+      HOME
 
-    &nbsp;|&nbsp;
-    {testLocaleMessage}
-    &nbsp;|&nbsp;
-    {locales.hello}
-    &nbsp;|&nbsp;
-    {locales.testLocaleMessage}
-  </>;
+      &nbsp;|&nbsp;
+      {testLocaleMessage}
+      &nbsp;|&nbsp;
+      {locales.hello}
+      &nbsp;|&nbsp;
+      {locales.testLocaleMessage}
+    </>
+  );
 }

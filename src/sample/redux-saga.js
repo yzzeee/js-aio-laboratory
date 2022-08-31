@@ -11,10 +11,10 @@ const SET_COMMENT = 'SET_COMMENT';
 
 function reducer(state, action) {
   switch (action.type) {
-    case SET_COMMENT:
-      return { ...state, comment: action.payload };
-    default:
-      return state;
+  case SET_COMMENT:
+    return { ...state, comment: action.payload };
+  default:
+    return state;
   }
 }
 
@@ -33,11 +33,9 @@ function* helloSaga() {
 function* watchCommentSaga() {
   yield takeEvery(ASYNC_GET_COMMENT, function* () {
     const comment = yield call(
-      id =>
-        fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res =>
-          res.json()
-        ),
-      Math.floor(Math.random() * 10) + 1
+      id => fetch(`https://jsonplaceholder.typicode.com/users/${id}`).then(res => res.json(),
+      ),
+      Math.floor(Math.random() * 10) + 1,
     );
 
     yield put({ type: SET_COMMENT, payload: comment });
@@ -62,7 +60,7 @@ function Component() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <Component />
+    <Component/>
   </Provider>,
-  document.getElementById('redux-saga')
+  document.getElementById('redux-saga'),
 );

@@ -1,6 +1,6 @@
 import Charts from 'react-apexcharts';
 import { ApexOptions } from 'apexcharts';
-import { SynchronizedAreaChart } from '../component/chart/areachart/SyncronizedAreaChart';
+import SynchronizedAreaChart from '../component/chart/areachart/SyncronizedAreaChart';
 
 const data = [
   {
@@ -117,13 +117,15 @@ const data = [
   },
 ];
 
-const series = [{
-  name: 'series1',
-  data: [31, 40, 28, 51, 42, 109, 100],
-}, {
-  name: 'series2',
-  data: [11, 32, 45, 32, 34, 52, 41],
-},
+const series = [
+  {
+    name: 'series1',
+    data: [31, 40, 28, 51, 42, 109, 100],
+  },
+  {
+    name: 'series2',
+    data: [11, 32, 45, 32, 34, 52, 41],
+  },
   {
     name: 'series2',
     data: [1, 3, 4, 3, 3, 5, 4],
@@ -187,83 +189,83 @@ const series = [{
 ];
 
 const rechart: any = {
-  '0': {
-    'timestamp': 1655109000,
-    'unit': 'Core',
-    'value': 38.54,
-    'value2': 10,
+  0: {
+    timestamp: 1655109000,
+    unit: 'Core',
+    value: 38.54,
+    value2: 10,
   },
-  '1': {
-    'timestamp': 1655109300,
-    'unit': 'Core',
-    'value': 38.37,
-    'value2': 20,
+  1: {
+    timestamp: 1655109300,
+    unit: 'Core',
+    value: 38.37,
+    value2: 20,
   },
-  '2': {
-    'timestamp': 1655109600,
-    'unit': 'Core',
-    'value': 38.03,
-    'value2': 30,
+  2: {
+    timestamp: 1655109600,
+    unit: 'Core',
+    value: 38.03,
+    value2: 30,
   },
-  '3': {
-    'timestamp': 1655109900,
-    'unit': 'Core',
-    'value': 37.01,
-    'value2': 40,
+  3: {
+    timestamp: 1655109900,
+    unit: 'Core',
+    value: 37.01,
+    value2: 40,
   },
-  '4': {
-    'timestamp': 1655110200,
-    'unit': 'Core',
-    'value': 37.77,
-    'value2': 50,
+  4: {
+    timestamp: 1655110200,
+    unit: 'Core',
+    value: 37.77,
+    value2: 50,
   },
-  '5': {
-    'timestamp': 1655110500,
-    'unit': 'Core',
-    'value': 37.61,
-    'value2': 60,
+  5: {
+    timestamp: 1655110500,
+    unit: 'Core',
+    value: 37.61,
+    value2: 60,
   },
-  '6': {
-    'timestamp': 1655110800,
-    'unit': 'Core',
-    'value': 37.29,
-    'value2': 70,
+  6: {
+    timestamp: 1655110800,
+    unit: 'Core',
+    value: 37.29,
+    value2: 70,
   },
-  '7': {
-    'timestamp': 1655111100,
-    'unit': 'Core',
-    'value': 37.6,
-    'value2': 80,
+  7: {
+    timestamp: 1655111100,
+    unit: 'Core',
+    value: 37.6,
+    value2: 80,
   },
-  '8': {
-    'timestamp': 1655111400,
-    'unit': 'Core',
-    'value': 36.96,
-    'value2': 90,
+  8: {
+    timestamp: 1655111400,
+    unit: 'Core',
+    value: 36.96,
+    value2: 90,
   },
-  '9': {
-    'timestamp': 1655111700,
-    'unit': 'Core',
-    'value': 36.77,
-    'value2': 38.54,
+  9: {
+    timestamp: 1655111700,
+    unit: 'Core',
+    value: 36.77,
+    value2: 38.54,
   },
-  '10': {
-    'timestamp': 1655112000,
-    'unit': 'Core',
-    'value': 37.17,
-    'value2': 38.54,
+  10: {
+    timestamp: 1655112000,
+    unit: 'Core',
+    value: 37.17,
+    value2: 38.54,
   },
-  '11': {
-    'timestamp': 1655112300,
-    'unit': 'Core',
-    'value': 36.67,
-    'value2': 38.54,
+  11: {
+    timestamp: 1655112300,
+    unit: 'Core',
+    value: 36.67,
+    value2: 38.54,
   },
-  '12': {
-    'timestamp': 1655112600,
-    'unit': 'Core',
-    'value': 36.8,
-    'value2': 38.54,
+  12: {
+    timestamp: 1655112600,
+    unit: 'Core',
+    value: 36.8,
+    value2: 38.54,
   },
 };
 
@@ -291,7 +293,7 @@ const options: ApexOptions = {
 
 export default function PlaygroundPage() {
   return <div style={{ backgroundColor: 'white' }}>
-    <SynchronizedAreaChart syncId='test' data={data} xPvt='name' yPvts={['amt', 'uv']} />
-    <Charts series={series} options={options} type='area' height={350} />
-  </div>;
+    <SynchronizedAreaChart data={data} syncId="test" xPvt="name" yPvts={['amt', 'uv']}/>
+    <Charts height={350} options={options} series={series} type="area"/>
+         </div>;
 }

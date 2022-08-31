@@ -1,4 +1,4 @@
-import { reduce } from 'lodash/collection'
+import { reduce } from 'lodash/collection';
 import { isArray, isEmpty, isString } from 'lodash/lang';
 import { mapValues } from 'lodash/object';
 import { replace } from 'lodash/string';
@@ -19,20 +19,19 @@ export const toIntl = (formatMessage, originIntlIds) => {
     if (!isEmpty(i)) {
       // String 또는 JSX.Element 일 때 처리
       if (!isArray(i)) {
-        if (r1.test(i)) {
+        if (r1.test(i))
           return replace(i, 'c.', '');
-        }
-        if (r2.test(i)) {
+
+        if (r2.test(i))
           return f({ id: i });
-        }
+
         return i;
       }
 
       // 배열일 때 처리
       const [h, ...t] = i;
-      if (isArray(t[0])) {
+      if (isArray(t[0]))
         t[0] = `c.${_toIntl(formatMessage, t[0])}`;
-      }
 
       const v = reduce(t, (acc, id, idx) => ({ ...acc, [`arg${idx}`]: _toIntl(f, id) }), {});
       return f({ id: h }, v);
@@ -53,6 +52,4 @@ export const toIntl = (formatMessage, originIntlIds) => {
 export const getLocaleObject = (
   formatMessage,
   objs,
-) => {
-  return mapValues(objs, (obj) => toIntl(formatMessage, obj));
-};
+) => mapValues(objs, obj => toIntl(formatMessage, obj));

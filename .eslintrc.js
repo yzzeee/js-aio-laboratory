@@ -1,66 +1,116 @@
 module.exports = {
-    env: {
-        browser: true,
-        node: true,
+  env: { browser: true, node: true },
+  extends: ['eslint:recommended', 'plugin:@typescript-eslint/recommended', 'plugin:react/recommended'],
+  globals: { React: true },
+  overrides: [
+    {
+      files: ['*.js'],
+      rules: { '@typescript-eslint/no-var-requires': 0 },
     },
-    extends: ["eslint:recommended", "plugin:@typescript-eslint/recommended", "plugin:react/recommended"],
-    globals: {
-        React: true,
+    {
+      files: ['src/util/**'],
+      rules: { 'import/prefer-default-export': 0 },
     },
-    overrides: [
-        {
-            files: ['*.js'],
-            rules: {
-                "@typescript-eslint/no-var-requires": 0
-            }
-        }
+  ],
+  parserOptions: { ecmaFeatures: { jsx: true }, ecmaVersion: 13, sourceType: 'module' },
+  plugins: ['import'],
+  root: true,
+  rules: {
+    // eslint
+    'arrow-body-style': [2, 'as-needed'],
+    'array-bracket-newline': [2, { multiline: true }],
+    'array-element-newline': [2, 'consistent', { minItems: 10 }],
+    'arrow-parens': [2, 'as-needed'],
+    'brace-style': 2,
+    'comma-dangle': [2, 'always-multiline'],
+    'comma-spacing': [2, { after: true, before: false }],
+    'comma-style': [2, 'last'],
+    curly: [2, 'multi'],
+    eqeqeq: [2, 'smart'],
+    'generator-star-spacing': [2, { after: true, before: false }],
+    indent: [2, 2, { ignoredNodes: ['JSXElement *', 'JSXElement'] }],
+    'implicit-arrow-linebreak': 2,
+    'jsx-quotes': [2, 'prefer-double'],
+    'key-spacing': 2,
+    'linebreak-style': [2, 'unix'],
+    'no-confusing-arrow': 2,
+    'no-const-assign': 2,
+    'no-constant-condition': 2,
+    'no-debugger': 2,
+    'no-else-return': 2,
+    'no-multi-spaces': [2, { exceptions: { ImportDeclaration: false, Property: false } }],
+    'no-multiple-empty-lines': [2, { max: 1, maxBOF: 0 }],
+    'no-param-reassign': 2,
+    'no-plusplus': [2, { allowForLoopAfterthoughts: true }],
+    'no-redeclare': 2,
+    'no-tabs': 2,
+    'no-this-before-super': 2,
+    'no-useless-computed-key': 2,
+    'no-useless-return': 2,
+    'no-var': 2,
+    'object-curly-newline': [
+      2, {
+        ExportDeclaration: { minProperties: 5, multiline: true },
+        ImportDeclaration: 'never',
+        ObjectPattern: { minProperties: 5, multiline: true },
+      },
     ],
-    parserOptions: {
-        ecmaFeatures: {
-            jsx: true
-        },
-        ecmaVersion: 13,
-        sourceType: "module",
-    },
-    plugins: ["import"],
-    root: true,
-    rules: {
-        'import/no-duplicates': 2,
-        'import/no-unresolved': 2,
-        'import/order': [
-            2,
-            {
-                alphabetize: {
-                    caseInsensitive: true,
-                    order: 'asc',
-                },
-                groups: [
-                    "builtin",
-                    "external",
-                    "internal",
-                    ["sibling", "parent", "index"],
-                    "type",
-                    "unknown"
-                ],
-                'newlines-between': 'never',
-                pathGroups: [
-                    {
-                        group: 'external',
-                        pattern: '{react*,react*/**}',
-                        position: 'before',
-                    },
-                ],
-            },
-        ],
-        'react/prop-types': 0,
-        'react/react-in-jsx-scope': 0,
-        'sort-imports': [2, { 'ignoreDeclarationSort': true }],
-    },
-    settings: {
-        "import/resolver": {
-            node: true,
-            typescript: true,
-            webpack: true,
-        },
-    },
-}
+    'object-curly-spacing': [2, 'always'],
+    'object-property-newline': [2, { allowAllPropertiesOnSameLine: true }],
+    'object-shorthand': [2, 'consistent-as-needed'],
+    'prefer-const': 2,
+    'prefer-template': 2,
+    'quote-props': [2, 'as-needed'],
+    quotes: [2, 'single'],
+    semi: [2, 'always'],
+    'semi-spacing': 2,
+    'space-before-blocks': 2,
+    'space-before-function-paren': [2, { anonymous: 'never', asyncArrow: 'always', named: 'never' }],
+    'space-in-parens': 2,
+    'space-infix-ops': 2,
+    'space-unary-ops': 2,
+    'spaced-comment': [2, 'always', { block: { balanced: true, exceptions: ['*'] }, line: { exceptions: ['-', '+'] } }],
+    'sort-imports': [2, { ignoreDeclarationSort: true }],
+    'switch-colon-spacing': 2,
+    'template-curly-spacing': 2,
+    'wrap-iife': 2,
+    'yield-star-spacing': 2,
+    yoda: 2,
+
+    // eslint-import-plugin
+    'import/newline-after-import': 2,
+    'import/no-duplicates': 2,
+    'import/no-unresolved': 2,
+    'import/order': [
+      2, {
+        alphabetize: { caseInsensitive: true, order: 'asc' },
+        groups: ['builtin', 'external', 'internal', ['sibling', 'parent', 'index'], 'type', 'unknown'],
+        'newlines-between': 'never',
+        pathGroups: [{ group: 'external', pattern: '{react*,react*/**}', position: 'before' }],
+      },
+    ],
+    'import/prefer-default-export': 2,
+
+    // eslint-plugin-react
+    'react/jsx-boolean-value': 2,
+    'react/jsx-closing-bracket-location': [2, 'after-props'],
+    'react/jsx-closing-tag-location': 2,
+    'react/jsx-curly-brace-presence': [2, { children: 'never', props: 'never', propElementValues: 'always' }],
+    'react/jsx-first-prop-new-line': [2, 'never'],
+    'react/jsx-indent-props': [2, 'first'],
+    'react/jsx-sort-props': [
+      2, {
+        callbacksLast: true,
+        ignoreCase: true,
+        multiline: 'last',
+        reservedFirst: ['key'],
+        shorthandFirst: true,
+      },
+    ],
+    'react/jsx-max-props-per-line': [2, { maximum: 1, when: 'multiline' }],
+    'react/jsx-tag-spacing': [2, { beforeSelfClosing: 'never' }],
+    'react/prop-types': 0,
+    'react/react-in-jsx-scope': 0,
+  },
+  settings: { 'import/resolver': { node: true, typescript: true, webpack: true } },
+};

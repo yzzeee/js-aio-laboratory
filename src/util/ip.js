@@ -19,22 +19,23 @@ export const convertIpListToLongListInObjects = (objs, key, id, name) => {
   return S.go(
     objs,
     C.map(obj => {
-      let errors = []; // 전달된 IP가 유효하지 않다면 에러 메시지 저장할 배열
+      const errors = []; // 전달된 IP가 유효하지 않다면 에러 메시지 저장할 배열
       const ipList = obj[key];
       const convertedIpList = ipListToLongListConverter(
         lodash.isString(ipList) ? lodash.split(ipList, '\n') : ipList,
         idx,
-        errors
+        errors,
       );
 
       // 범위 형태 IP와 단일 형태의 IP를 그룹으로 나눔
       const group = lodash.groupBy(
         lodash.uniq(lodash.compact(convertedIpList)),
-        item => (lodash.includes(item, '-') ? 'ranges' : 'singles')
+        item => (lodash.includes(item, '-') ? 'ranges' : 'singles'),
       );
 
       if (id) group['id'] = obj[id];
       if (name) group['name'] = obj[name];
+      // eslint-disable-next-line no-plusplus
       group['index'] = idx++;
 
       let host_count = 0; // 해당 ip(ranges, singles)에 속하는 전체 호스트 카운트 변수
@@ -50,7 +51,7 @@ export const convertIpListToLongListInObjects = (objs, key, id, name) => {
               const parsed = lodash.split(range, '-');
               return acc + (Number(parsed[1]) - Number(parsed[0]) + 1);
             },
-            0
+            0,
           );
       } else {
         group['ranges'] = [];
@@ -68,13 +69,14 @@ export const convertIpListToLongListInObjects = (objs, key, id, name) => {
 
       // 호스트 수 저장
       group['host_count'] = host_count;
+      // eslint-disable-next-line object-shorthand
       return {
         ...obj,
         converted_ip_addresses: group,
         errors,
       };
     }),
-    S.takeAll
+    S.takeAll,
   );
 };
 
@@ -84,7 +86,7 @@ export const convertIpListToLongListInObjects = (objs, key, id, name) => {
  */
 export const comparableIpFilter = S.pipe(
   L.filter(f => lodash.isEmpty(f.errors)),
-  C.map(f => f.converted_ip_addresses)
+  C.map(f => f.converted_ip_addresses),
 );
 
 /**
@@ -94,7 +96,7 @@ export const comparableIpFilter = S.pipe(
  */
 export const findMatchedIpFromObject = (
   userInputIpList,
-  groupedIpListObject
+  groupedIpListObject,
 ) => {
   let group = 'production';
   return S.go(
@@ -103,25 +105,23 @@ export const findMatchedIpFromObject = (
       if (item['group']) group = item['zone'];
       return groupedIpListObject[group];
     }),
-    C.map(ipList => {
-      return comparableIpFilter(ipList);
-    }),
+    C.map(ipList => comparableIpFilter(ipList)),
     comparableIpList => {
       let index = 0;
       return lodash.map(comparableIpList, ipList => {
+        // eslint-disable-next-line no-plusplus
         const target = userInputIpList[index++];
         const targetIps = [...target['ranges'], ...target['singles']];
 
         // 호스트 수가 동일한 객체를 필터링
         const hostCountMatchedObject = lodash.filter(
           ipList,
-          ipInfo => target.host_count === ipInfo.host_count
+          ipInfo => target.host_count === ipInfo.host_count,
         );
 
         // 호스트 수가 동일한 객체가 없다면 빈 객체 반환
-        if (lodash.isEmpty(hostCountMatchedObject)) {
+        if (lodash.isEmpty(hostCountMatchedObject))
           return {};
-        }
 
         // 동일한 객체 조회
         const matchedObject = S.go(
@@ -131,9 +131,9 @@ export const findMatchedIpFromObject = (
             const filteredSingles = filteredIp['singles'];
 
             if (filteredIp['host_count'] === 1) {
-              if (filteredSingles[0] === targetIps[0]) {
+              if (filteredSingles[0] === targetIps[0])
                 return groupedIpListObject[target['id']][filteredIp['index']];
-              }
+
               return {};
             }
 
@@ -143,23 +143,22 @@ export const findMatchedIpFromObject = (
                 const targetEnd = Number(lodash.split(targetIp, '-')[1]);
                 const range = targetEnd - targetStart + 1;
 
-                if (lodash.includes(filteredRanges, targetIp)) {
+                if (lodash.includes(filteredRanges, targetIp))
                   // 범위 아이피와 비교하여 동일한 값 있는지 확인
                   return true;
-                }
 
-                let ok = lodash.some(filteredRanges, filteredIp => {
+                const ok = lodash.some(filteredRanges, filteredIp => {
                   // 범위 아이피 내에 속하는지 확인
                   const filteredStart = Number(
-                    lodash.split(filteredIp, '-')[0]
+                    lodash.split(filteredIp, '-')[0],
                   );
                   const filteredEnd = Number(lodash.split(filteredIp, '-')[1]);
                   if (
                     targetStart >= filteredStart &&
                     targetEnd <= filteredEnd
-                  ) {
+                  )
                     return true;
-                  }
+
                 });
 
                 if (
@@ -168,60 +167,59 @@ export const findMatchedIpFromObject = (
                 ) {
                   const startIndex = lodash.findIndex(
                     filteredSingles,
-                    single => single === targetStart
+                    single => single === targetStart,
                   );
                   const endIndex = lodash.findIndex(
                     filteredSingles,
-                    single => single === targetEnd
+                    single => single === targetEnd,
                   );
 
-                  if (endIndex - startIndex + 1 === range) {
+                  if (endIndex - startIndex + 1 === range)
                     return true;
-                  }
+
                 }
 
-                if (ok) {
+                if (ok)
                   return true;
-                }
+
               } else {
-                if (lodash.includes(filteredSingles, targetIp)) {
+                if (lodash.includes(filteredSingles, targetIp))
                   // 단일 아이피와 비교
                   return true;
-                } else {
-                  // 범위 아이피와 비교
-                  let ok = lodash.some(filteredRanges, filteredIp => {
-                    // 범위 아이피 내에 속하는지 확인
-                    const filteredStart = Number(
-                      lodash.split(filteredIp, '-')[0]
-                    );
-                    const filteredEnd = Number(
-                      lodash.split(filteredIp, '-')[1]
-                    );
 
-                    if (targetIp >= filteredStart && targetIp <= filteredEnd) {
-                      return true;
-                    }
-                  });
+                // 범위 아이피와 비교
+                const ok = lodash.some(filteredRanges, filteredIp => {
+                  // 범위 아이피 내에 속하는지 확인
+                  const filteredStart = Number(
+                    lodash.split(filteredIp, '-')[0],
+                  );
+                  const filteredEnd = Number(
+                    lodash.split(filteredIp, '-')[1],
+                  );
 
-                  if (ok) {
-                    return ok;
-                  }
-                }
+                  if (targetIp >= filteredStart && targetIp <= filteredEnd)
+                    return true;
+
+                });
+
+                if (ok)
+                  return ok;
+
               }
             });
 
-            if (targetIps.length === S.compact(targetMap).length) {
+            if (targetIps.length === S.compact(targetMap).length)
               // targetMap 내의 모든 값이 참일 때 동일 IP
               return groupedIpListObject[group][filteredIp['index']];
-            }
+
           }),
           L.filter(f => !lodash.isEmpty(f)),
-          S.take1 // 가장 처음 조회되는 하나만 선택
+          S.take1, // 가장 처음 조회되는 하나만 선택
         );
 
         return !lodash.isEmpty(matchedObject) ? matchedObject[0] : {};
       });
-    }
+    },
   );
 };
 
@@ -231,24 +229,23 @@ export const findMatchedIpFromObject = (
  * @param {Object[]} errors 에러 배열
  * @description IP List를 Long 타입 List로 변환하여 새로운 배열을 반환한다.
  */
-export const ipListToLongListConverter = (ipList, idx, errors) => {
-  return S.go(
-    ipList,
-    L.map(item => {
-      try {
-        idx++;
-        return ipToLong(item);
-      } catch (e) {
-        if (errors) {
-          errors.push(`${item} => ${e}`);
-        }
-        return '';
-      }
-    }),
-    L.compact,
-    S.uniq
-  );
-};
+export const ipListToLongListConverter = (ipList, idx, errors) => S.go(
+  ipList,
+  L.map(item => {
+    try {
+      // eslint-disable-next-line no-param-reassign, no-plusplus
+      idx++;
+      return ipToLong(item);
+    } catch (e) {
+      if (errors)
+        errors.push(`${item} => ${e}`);
+
+      return '';
+    }
+  }),
+  L.compact,
+  S.uniq,
+);
 
 /**
  * @param {Object[]} item 단일 IP
@@ -261,48 +258,42 @@ export const ipToLong = item => {
     const prev = parsedIp[0];
     const next = parsedIp[1];
 
-    if (parsedIp.length !== 2) {
+    if (parsedIp.length !== 2)
       throw new Error('범위 형태 입력 확인 필요');
-    }
 
-    if (!ip_utils.isValidIp(prev) || !ip_utils.isValidIp(next)) {
+    if (!ip_utils.isValidIp(prev) || !ip_utils.isValidIp(next))
       throw new Error('입력 IP 확인 필요');
-    }
 
-    if (!ip_utils.isValidIpv4(prev) || !ip_utils.isValidIpv4(next)) {
+    if (!ip_utils.isValidIpv4(prev) || !ip_utils.isValidIpv4(next))
       throw new Error('IPv6 Unsupported');
-    }
 
-    if (ip.toLong(prev) >= ip.toLong(next)) {
+    if (ip.toLong(prev) >= ip.toLong(next))
       throw new Error('입력 IP 범위 확인 필요');
-    }
 
     return lodash.join(
       lodash.map(parsedIp, o => ip.toLong(o)),
-      '-'
+      '-',
     );
-  } else if (lodash.includes(item, '/')) {
+  } else if (lodash.includes(item, '/'))
     // cidr 형태 처리
     try {
       const obj = ip.cidrSubnet(item);
 
-      if (obj['subnetMaskLength'] >= 32) {
+      if (obj['subnetMaskLength'] >= 32)
         throw new Error('유효하지 않은 서브넷');
-      }
+
       return `${ip.toLong(obj['firstAddress'])}-${ip.toLong(
-        obj['lastAddress']
+        obj['lastAddress'],
       )}`;
     } catch (e) {
       throw new Error(e.message);
     }
-  } else {
-    if (!ip_utils.isValidIp(item)) {
+  else {
+    if (!ip_utils.isValidIp(item))
       throw new Error('입력 IP 확인 필요');
-    }
 
-    if (!ip_utils.isValidIpv4(item)) {
+    if (!ip_utils.isValidIpv4(item))
       throw new Error('IPv6 Unsupported');
-    }
 
     return ip.toLong(item);
   }
@@ -312,15 +303,14 @@ export const ipToLong = item => {
  * @param {Object[]} ipList IP List
  * @description Long 타입의 IP List를 Readable IP List로 변환된 새로운 배열을 반환한다.
  */
-export const longListToIpListConverter = ipList =>
-  lodash.map(ipList, item => {
-    if (lodash.includes(item, '-')) {
-      const parsed = lodash.split(item, '-');
-      return `${ip.fromLong(parsed[0])}-${ip.fromLong(parsed[1])}`;
-    } else {
-      return `${ip.fromLong(item)}`;
-    }
-  });
+export const longListToIpListConverter = ipList => lodash.map(ipList, item => {
+  if (lodash.includes(item, '-')) {
+    const parsed = lodash.split(item, '-');
+    return `${ip.fromLong(parsed[0])}-${ip.fromLong(parsed[1])}`;
+  }
+  return `${ip.fromLong(item)}`;
+
+});
 
 /**
  * @param ranges long 타입으로 변환된 범위 형태의 IP 배열
@@ -336,20 +326,20 @@ export const rangesReducer = ranges => {
       const next = lodash.split(ranges[i + 1], '-');
 
       if (ranges[i] === ranges[i + 1]) {
-        if (!lodash.includes(range, ranges[i])) {
+        if (!lodash.includes(range, ranges[i]))
           range.push(ranges[i]);
-        }
+
       } else if (prev[1] >= next[0]) {
         const resLast = lodash.split(range[lodash.findLastIndex(range)], '-');
         range[lodash.findLastIndex(range)] = `${
           prev[0] > resLast[0] ? resLast[0] : prev[0]
         }-${prev[1] > next[1] ? prev[1] : next[1]}`;
-      } else {
+      } else
         range.push(lodash.join(next, '-'));
-      }
+
     }
     return range.length === ranges.length ? range : recur(lodash.sortBy(range));
-  })(sortedRanges);
+  }(sortedRanges));
 };
 
 /**
@@ -357,22 +347,20 @@ export const rangesReducer = ranges => {
  * @param ranges long 타입으로 변환된 범위 형태의 IP 배열
  * @description 단일 형태 IP 배열 중 ranges 포함되어 있는 IP를 필터링한 새로운 배열을 반환한다.
  */
-export const singlesFilter = (singles, ranges) => {
-  return lodash.sortBy(
-    lodash.reject(singles, single => {
-      let contain = false;
-      lodash.each(ranges, range => {
-        if (
-          lodash.split(range, '-')[0] <= single &&
+export const singlesFilter = (singles, ranges) => lodash.sortBy(
+  lodash.reject(singles, single => {
+    let contain = false;
+    lodash.each(ranges, range => {
+      if (
+        lodash.split(range, '-')[0] <= single &&
           single <= lodash.split(range, '-')[1]
-        ) {
-          contain = true;
-        }
-      });
-      return contain;
-    })
-  );
-};
+      )
+        contain = true;
+
+    });
+    return contain;
+  }),
+);
 
 // ---------------------------------------------------------------------------------------------------------------------
 

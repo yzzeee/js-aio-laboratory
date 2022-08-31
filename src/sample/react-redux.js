@@ -8,21 +8,20 @@ const DECREMENT1 = 'DECREMENT1';
 const DECREMENT2 = 'DECREMENT2';
 
 function counter(state, action) {
-  if (state === undefined) {
+  if (state === undefined)
     return { count1: 0, count2: 0 };
-  }
 
   switch (action.type) {
-    case INCREMENT1:
-      return { ...state, count1: state.count1 + 1 };
-    case INCREMENT2:
-      return { ...state, count2: state.count2 + 1 };
-    case DECREMENT1:
-      return { ...state, count1: state.count1 - 1 };
-    case DECREMENT2:
-      return { ...state, count2: state.count2 - 1 };
-    default:
-      return state;
+  case INCREMENT1:
+    return { ...state, count1: state.count1 + 1 };
+  case INCREMENT2:
+    return { ...state, count2: state.count2 + 1 };
+  case DECREMENT1:
+    return { ...state, count1: state.count1 - 1 };
+  case DECREMENT2:
+    return { ...state, count2: state.count2 - 1 };
+  default:
+    return state;
   }
 }
 
@@ -57,7 +56,7 @@ const mapDispatchToProps = dispatch => ({
 
 const ClassComponentCounter = connect(
   mapStateToProps,
-  mapDispatchToProps
+  mapDispatchToProps,
 )(ClassComponent);
 
 function FunctionalComponentCounter() {
@@ -74,8 +73,8 @@ function FunctionalComponentCounter() {
 
 ReactDOM.render(
   <Provider store={store}>
-    <ClassComponentCounter />
-    <FunctionalComponentCounter />
+    <ClassComponentCounter/>
+    <FunctionalComponentCounter/>
   </Provider>,
-  document.getElementById('react-redux')
+  document.getElementById('react-redux'),
 );

@@ -1,7 +1,7 @@
-const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
-const { EnvironmentPlugin, ProvidePlugin } = require('webpack');
 const env = require('dotenv');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { EnvironmentPlugin, ProvidePlugin } = require('webpack');
 env.config();
 
 module.exports = {
@@ -64,8 +64,8 @@ module.exports = {
     }),
     new EnvironmentPlugin(['AES_KEY']),
     new ProvidePlugin({
-      'React': 'react',
-    })
+      React: 'react',
+    }),
   ],
   resolve: {
     alias: {
