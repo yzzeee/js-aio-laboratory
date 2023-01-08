@@ -8,6 +8,7 @@ import HelloRedux from './component/HelloRedux';
 import HelloReduxSaga from './component/HelloReduxSaga';
 import HelloReduxThunk from './component/HelloReduxThunk';
 import Home from './component/Home';
+import IndexPage from './page/IndexPage';
 import PlaygroundPage from './page/PlaygroundPage';
 
 const DEFAULT_LOCALE = 'ko';
@@ -26,7 +27,8 @@ export default function App() {
       <input checked={locale === 'ko'} type="checkbox" onChange={handleLocale}/>
       <Router>
         <div>
-          <Link to="/">Playground</Link>
+          <Link to="/">Index</Link>
+          <Link to="/chart">Chart</Link>
           <Link to="/react">React</Link>
           <Link to="/redux">Redux</Link>
           <Link to="/react-redux">React Redux</Link>
@@ -34,7 +36,8 @@ export default function App() {
           <Link to="/redux-saga">Redux Saga</Link>
 
           <Routes>
-            <Route element={<PlaygroundPage/>} path="/"/>
+            <Route element={<IndexPage/>} path="/"/>
+            <Route element={<PlaygroundPage/>} path="/chart"/>
             <Route element={<Home/>} path="/:active_tab"/>
             <Route element={<HelloReact/>} path="/react"/>
             <Route element={<HelloRedux/>} path="/redux"/>

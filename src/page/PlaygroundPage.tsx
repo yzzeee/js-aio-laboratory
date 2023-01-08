@@ -292,8 +292,10 @@ const options: ApexOptions = {
 };
 
 export default function PlaygroundPage() {
-  return <div style={{ backgroundColor: 'white' }}>
-    <SynchronizedAreaChart data={data} syncId="test" xPvt="name" yPvts={['amt', 'uv']}/>
-    <Charts height={350} options={options} series={series} type="area"/>
-         </div>;
+  return (
+    <div style={{ backgroundColor: 'white' }}>
+      <SynchronizedAreaChart data={data} syncId="test" xPvt="name" yPvts={['amt', 'uv']}/>
+      <Charts height={350} options={options} series={series} type="area"/>
+    </div>
+  );
 }
