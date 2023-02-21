@@ -80,7 +80,7 @@ module.exports = {
     // eslint-import-plugin
     'import/newline-after-import': 2,
     'import/no-duplicates': 2,
-    'import/no-unresolved': 2,
+    'import/no-unresolved': 0,
     'import/order': [
       2, {
         alphabetize: { caseInsensitive: true, order: 'asc' },
@@ -89,7 +89,7 @@ module.exports = {
         pathGroups: [{ group: 'external', pattern: '{react*,react*/**}', position: 'before' }],
       },
     ],
-    'import/prefer-default-export': 2,
+    'import/prefer-default-export': 0,
 
     // eslint-plugin-react
     'react/jsx-boolean-value': 2,

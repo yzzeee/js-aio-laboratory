@@ -7,6 +7,7 @@ import HelloReactRedux from './component/HelloReactRedux';
 import HelloRedux from './component/HelloRedux';
 import HelloReduxSaga from './component/HelloReduxSaga';
 import HelloReduxThunk from './component/HelloReduxThunk';
+import HelloZustand from './component/HelloZustand';
 import Home from './component/Home';
 import IndexPage from './page/IndexPage';
 import PlaygroundPage from './page/PlaygroundPage';
@@ -34,6 +35,7 @@ export default function App() {
           <Link to="/react-redux">React Redux</Link>
           <Link to="/redux-thunk">Redux Thunk</Link>
           <Link to="/redux-saga">Redux Saga</Link>
+          <Link to="/zustand">Zustand</Link>
 
           <Routes>
             <Route element={<IndexPage/>} path="/"/>
@@ -44,6 +46,7 @@ export default function App() {
             <Route element={<HelloReactRedux/>} path="/react-redux"/>
             <Route element={<HelloReduxThunk/>} path="/redux-thunk"/>
             <Route element={<HelloReduxSaga/>} path="/redux-saga"/>
+            <Route element={<HelloZustand/>} path="/zustand"/>
           </Routes>
         </div>
       </Router>
