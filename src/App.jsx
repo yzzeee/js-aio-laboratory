@@ -29,7 +29,7 @@ export default function App() {
       <Router>
         <div>
           <Link to="/">Index</Link>
-          <Link to="/chart">Chart</Link>
+          <Link to="/playground">Playground</Link>
           <Link to="/react">React</Link>
           <Link to="/redux">Redux</Link>
           <Link to="/react-redux">React Redux</Link>
@@ -39,7 +39,7 @@ export default function App() {
 
           <Routes>
             <Route element={<IndexPage/>} path="/"/>
-            <Route element={<PlaygroundPage/>} path="/chart"/>
+            <Route element={<PlaygroundPage/>} path="/playground"/>
             <Route element={<Home/>} path="/:active_tab"/>
             <Route element={<HelloReact/>} path="/react"/>
             <Route element={<HelloRedux/>} path="/redux"/>
