@@ -1,4 +1,5 @@
 const { zipObject } = require('lodash');
+
 const req = require.context('./', false, /.js$/);
 const modules = req
   .keys()

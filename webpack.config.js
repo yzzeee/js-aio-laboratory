@@ -2,6 +2,7 @@ const path = require('path');
 const env = require('dotenv');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const { EnvironmentPlugin, ProvidePlugin } = require('webpack');
+
 env.config();
 
 module.exports = {
