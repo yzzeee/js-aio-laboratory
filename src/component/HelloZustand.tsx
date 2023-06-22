@@ -37,22 +37,18 @@ const AddFirstButton = () => {
   );
 };
 
-const HelloZustand = () => {
-  const { cleanCounterStore } = useCounterStore.use.actions();
-
-  return (
-    <div className="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
-      <First/>
-      &nbsp;&nbsp;
-      <AddFirstButton/>
-      &nbsp;&nbsp;
-      <Second/>
-      &nbsp;&nbsp;
-      <AddSecondButton/>
-      &nbsp;&nbsp;
-      <br/>
-    </div>
-  );
-};
+const HelloZustand = () => (
+  <div className="bg-white dark:bg-slate-800 rounded-lg px-6 py-8 ring-1 ring-slate-900/5 shadow-xl">
+    <First/>
+    &nbsp;&nbsp;
+    <AddFirstButton/>
+    &nbsp;&nbsp;
+    <Second/>
+    &nbsp;&nbsp;
+    <AddSecondButton/>
+    &nbsp;&nbsp;
+    <br/>
+  </div>
+);
 
 export default HelloZustand;

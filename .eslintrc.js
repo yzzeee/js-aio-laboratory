@@ -11,6 +11,13 @@ module.exports = {
       files: ['src/util/**'],
       rules: { 'import/prefer-default-export': 0 },
     },
+    {
+      files: ['src/{playground,sample,util}/**'],
+      rules: {
+        '@typescript-eslint/no-unused-vars': 0,
+        'no-var': 0,
+      },
+    },
   ],
   parserOptions: { ecmaFeatures: { jsx: true }, ecmaVersion: 13, sourceType: 'module' },
   plugins: ['import'],
@@ -112,5 +119,8 @@ module.exports = {
     'react/prop-types': 0,
     'react/react-in-jsx-scope': 0,
   },
-  settings: { 'import/resolver': { node: true, typescript: true, webpack: true } },
+  settings: {
+    react: { version: 'detect' },
+    'import/resolver': { node: true, typescript: true, webpack: true },
+  },
 };
