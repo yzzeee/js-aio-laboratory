@@ -1,5 +1,6 @@
 import { CounterSlice } from 'counter-module';
-import { ZustandFuncSelectors } from 'auto-zustand-selectors-hook';
+import { ZustandFuncSelectors, createSelectorFunctions } from 'auto-zustand-selectors-hook';
+import { omit } from 'lodash';
 import { create } from 'zustand';
 import { devtools, persist } from 'zustand/middleware';
 import { immer } from 'zustand/middleware/immer';
@@ -35,25 +36,15 @@ const store = create<CounterSlice>()(
         },
       })), {
         name: `se-persist:${STORE}`,
+        partialize: state => {
+          const omitted = ['actions']; /* 함수를 제외하지 않으면, 정상동작 하지 않음 */
+          return omit(state, omitted);
+        },
       }), {
       name: `${STORE}`,
       enabled: process.env.NODE_ENV === 'development',
       trace: true,
     }),
 );
-
-function createSelectorFunctions(_store) {
-  const storeIn = _store;
-  storeIn.use = {};
-  Object.keys(storeIn.getState()).forEach(function(key) {
-    const selector = function(state) {
-      return state[key];
-    };
-    storeIn.use[key] = function() {
-      return storeIn(selector);
-    };
-  });
-  return _store;
-}
 
 export const useCounterStore = createSelectorFunctions(store) as typeof store & ZustandFuncSelectors<CounterSlice>;

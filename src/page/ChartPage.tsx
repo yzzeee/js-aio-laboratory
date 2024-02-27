@@ -4,7 +4,7 @@ import SynchronizedAreaChart from '../component/chart/areachart/SyncronizedAreaC
 
 const data = [
   {
-    name: 'Page A',
+    name: new Date(),
     uv: 4000,
     pv: 2400,
     amt: 2400,
@@ -20,7 +20,7 @@ const data = [
     j: 1500,
   },
   {
-    name: 'Page B',
+    name: new Date(),
     uv: 3000,
     pv: 1398,
     amt: 2210,
@@ -36,7 +36,7 @@ const data = [
     j: 1500,
   },
   {
-    name: 'Page C',
+    name: new Date(),
     uv: 2000,
     pv: 1398,
     amt: 2210,
@@ -52,7 +52,7 @@ const data = [
     j: 1030,
   },
   {
-    name: 'Page D',
+    name: new Date(),
     uv: 2780,
     pv: 3908,
     amt: 2000,
@@ -68,7 +68,7 @@ const data = [
     j: 1700,
   },
   {
-    name: 'Page E',
+    name: new Date(),
     uv: 1890,
     pv: 4800,
     amt: 2181,
@@ -84,7 +84,7 @@ const data = [
     j: 1005,
   },
   {
-    name: 'Page F',
+    name: new Date(),
     uv: 2390,
     pv: 3800,
     amt: 2500,
@@ -100,7 +100,7 @@ const data = [
     j: 1000,
   },
   {
-    name: 'Page G',
+    name: new Date(),
     uv: 3490,
     pv: 4300,
     amt: 2100,

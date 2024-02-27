@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Outlet } from 'react-router-dom';
 import { useInterval } from '../hook/useInterval';
 
 export default function PlaygroundPage() {
@@ -22,7 +23,7 @@ export default function PlaygroundPage() {
   const [triggerFinishCallback, setTriggerFinishCallback] = useState(true);
 
   return (
-    <div className="bg-white p-5">
+    <div>
       {state}
       &nbsp;&nbsp;
       <button className="btn-primary" id="start" type="button" onClick={start}>
@@ -47,6 +48,7 @@ export default function PlaygroundPage() {
           Trigger finish callback
         </label>
       </div>
+      <Outlet/>
     </div>
   );
 }

@@ -25,8 +25,8 @@ const AbortControllerTest = () => {
 
   return (
     <>
-      {activeButton === BUTTON.RUN && <button onClick={handleRunClick}>RUN</button>}
-      {activeButton === BUTTON.STOP && <button onClick={handleStopClick}>STOP</button>}
+      {activeButton === BUTTON.RUN && <button className="btn-primary" onClick={handleRunClick}>RUN</button>}
+      {activeButton === BUTTON.STOP && <button className="btn-primary" onClick={handleStopClick}>STOP</button>}
     </>
   );
 };

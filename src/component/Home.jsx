@@ -1,10 +1,20 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { useEffect, useMemo } from 'react';
 import { useIntl } from 'react-intl';
-import { Outlet, useNavigate, useParams } from 'react-router-dom';
-import { Col, Nav, NavItem, NavLink, Row, TabContent, TabPane } from 'reactstrap';
+import { useNavigate, useParams } from 'react-router-dom';
+import TabContext from '@mui/lab/TabContext';
+import TabList from '@mui/lab/TabList';
+import TabPanel from '@mui/lab/TabPanel';
+import Box from '@mui/material/Box';
+import Tab from '@mui/material/Tab';
+import ChartPage from '@page/ChartPage';
+import PlaygroundPage from '@page/PlaygroundPage';
+import { useAtom } from 'jotai';
+import { localeAtom } from '../App';
 import { getLocaleObject, toIntl } from '../util/locale';
 import AbortControllerTest from './AbortControllerTest';
+
+const DEFAULT_ACTIVE_TAB = 'abort_controller';
+
 /**
  * @link https://www.pluralsight.com/guides/handling-tabs-using-page-urls-and-react-router-doms
  **/
@@ -16,38 +26,37 @@ export default function Home() {
   }), [formatMessage]);
   const testLocaleMessage = toIntl(formatMessage, ['t.multi', ['t.multi', 'w.hello', 'w.locale'], ['t.multi', 'w.really', 'w.welcome']]);
 
-  const DEFAULT_ACTIVE_TAB = 'in_progress';
+  const [locale, setLocale] = useAtom(localeAtom);
+
+  const handleLocale = () => {
+    setLocale(prev => (prev === 'ko' ? 'en' : 'ko'));
+  };
 
   const tabs = {
-    abort_controller_test: {
-      title: 'AbortControllerTest',
-      content: (
-        <Row className="p-2">
-          <Col className="p-2" sm="12">
-            <h4 className="text-info">AbortControllerTest</h4>
-            <AbortControllerTest/>
-          </Col>
-        </Row>
-      ),
+    abort_controller: {
+      title: 'abort_controller',
+      content: <AbortControllerTest/>,
     },
-    in_progress: {
-      title: 'In Progress',
-      content: (
-        <Row className="p-2">
-          <Col className="p-2" sm="12">
-            <h4 className="text-primary">In Progress Tasks</h4>
-          </Col>
-        </Row>
-      ),
+    use_interval: {
+      title: 'use_interval',
+      content: <PlaygroundPage/>,
     },
-    completed: {
-      title: 'Completed',
+    chart: {
+      title: 'chart',
+      content: <ChartPage/>,
+    },
+    react_intl: {
+      title: 'react_intl',
       content: (
-        <Row className="p-2">
-          <Col className="p-2" sm="12">
-            <h4 className="text-success">Completed Tasks</h4>
-          </Col>
-        </Row>
+        <h4 className="text-success">
+          <input checked={locale === 'ko'} type="checkbox" onChange={handleLocale}/>
+          &nbsp;|&nbsp;
+          {testLocaleMessage}
+          &nbsp;|&nbsp;
+          {locales.hello}
+          &nbsp;|&nbsp;
+          {locales.testLocaleMessage}
+        </h4>
       ),
     },
   };
@@ -56,13 +65,13 @@ export default function Home() {
 
   useEffect(() => {
     if (!active_tab)
-      navigate(`/${DEFAULT_ACTIVE_TAB}`);
+      navigate(`/home/${DEFAULT_ACTIVE_TAB}`);
 
   }, []);
 
   const toggle = tab => {
     if (active_tab !== tab)
-      navigate(`/${tab}`);
+      navigate(`/home/${tab}`);
 
   };
 
@@ -70,43 +79,28 @@ export default function Home() {
     <>
       <div className="row p-4">
         <div className="col-lg-12">
-          <h2 className="mb-4">Tasks</h2>
-          <Nav tabs>
-            {
-              Object.entries(tabs).map(tab => (
-                <NavItem key={tab[0]}>
-                  <NavLink className={active_tab === tab[0] ? 'active' : ''}
-                           role="button"
-                           onClick={() => {
-                      toggle(tab[0]);
-                    }}>
-                    {tab[1].title}
-                  </NavLink>
-                </NavItem>
-              ))
-            }
-          </Nav>
-
-          <TabContent activeTab={active_tab}>
-            {
-              Object.entries(tabs).map(tab => (
-                <TabPane key={tab[0]} tabId={tab[0]}>
-                  {tab[1].content}
-                  <Outlet/>
-                </TabPane>
-              ))
-            }
-          </TabContent>
+          <Box sx={{ width: '100%', typography: 'body1' }}>
+            <TabContext value={active_tab}>
+              <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
+                <TabList onChange={(event, newValue) => toggle(newValue)}>
+                  {
+                    Object.entries(tabs).map(([tabKey, tabValue]) => (
+                      <Tab key={tabKey} label={tabValue.title} value={tabKey}/>
+                    ))
+                  }
+                </TabList>
+              </Box>
+              {
+                Object.entries(tabs).map(([tabKey, tabValue]) => (
+                  <TabPanel key={tabKey} value={tabKey}>
+                    {tabValue.content}
+                  </TabPanel>
+                ))
+              }
+            </TabContext>
+          </Box>
         </div>
       </div>
-      HOME
-
-      &nbsp;|&nbsp;
-      {testLocaleMessage}
-      &nbsp;|&nbsp;
-      {locales.hello}
-      &nbsp;|&nbsp;
-      {locales.testLocaleMessage}
     </>
   );
 }

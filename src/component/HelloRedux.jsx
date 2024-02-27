@@ -18,23 +18,24 @@ function counter(state, action) {
 const store = Redux.createStore(counter);
 
 function Component() {
-  const [count, setCount] = useState();
+  const [count, setCount] = useState(0);
   store.subscribe(function listener() {
     setCount(store.getState());
   });
 
   return (
     <div>
-      <h1>Redux</h1>
       <p>
-        🍆 <span id="value">{count}</span>
-        <button id="increment"
+        🍆 <span className="m-5" id="value">{count}</span>
+        <button className="btn-primary mr-2"
+                id="increment"
                 onClick={() => {
             store.dispatch({ type: 'INCREMENT' });
           }}>
           +
         </button>
-        <button id="decrement"
+        <button className="btn-primary"
+                id="decrement"
                 onClick={() => {
             store.dispatch({ type: 'DECREMENT' });
           }}>

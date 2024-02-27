@@ -35,10 +35,10 @@ class ClassComponent extends React.Component {
     const { count, increment, decrement } = this.props;
 
     return (
-      <p>
-        🍋 <span>{count}</span>
-        <button onClick={() => increment()}>+</button>
-        <button onClick={() => decrement()}>-</button>
+      <p className="mb-4">
+        🍋 <span className="m-5">{count}</span>
+        <button className="btn-primary mr-2" onClick={() => increment()}>+</button>
+        <button className="btn-primary" onClick={() => decrement()}>-</button>
       </p>
     );
   }
@@ -63,9 +63,9 @@ function FunctionalComponentCounter() {
   const dispatch = useDispatch();
   return (
     <p>
-      🍓 <span>{count}</span>
-      <button onClick={() => dispatch({ type: INCREMENT2 })}>+</button>
-      <button onClick={() => dispatch({ type: DECREMENT2 })}>-</button>
+      🍓 <span className="m-5">{count}</span>
+      <button className="btn-primary mr-2" onClick={() => dispatch({ type: INCREMENT2 })}>+</button>
+      <button className="btn-primary" onClick={() => dispatch({ type: DECREMENT2 })}>-</button>
     </p>
   );
 }
